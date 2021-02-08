@@ -41,7 +41,7 @@ Players will be able to explore and answer questions that will help them learn b
     * /scripts (js)
         * map.js
         * player.js
-        * dialogue.js (incl fruits?)
+        * dialogue.js 
         * item.js
         * util.js
     * /styles (scss)
