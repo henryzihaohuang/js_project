@@ -16,7 +16,7 @@ Players will be able to explore and answer questions that will help them learn b
 * `User` must find a `passport`, `tickets`, and their `wallet`.
 * The game should have text that guides the `user` to the goal items.
 
-## Wireframes
+## Wireframe & Mockups
 
 <p align="center"> 
   <img src="https://i.ibb.co/m8mJM8Q/Screen-Shot-2021-02-08-at-12-22-57-AM.png">
