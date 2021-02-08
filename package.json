@@ -14,7 +14,7 @@
     "webpack:watch": "webpack --watch --config webpack.dev.js && NODE_ENV=development",
     "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize && NODE_ENV=production"
   },
-  "author": "mrcjbradley",
+  "author": "",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
@@ -36,5 +36,13 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henryzihaohuang/js_project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/henryzihaohuang/js_project/issues"
+  },
+  "homepage": "https://github.com/henryzihaohuang/js_project#readme"
 }
