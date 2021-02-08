@@ -8,7 +8,7 @@ Lost in Translation is a single-level isometric game to designed to emulate the 
 
 Players will be able to explore and answer questions that will help them learn basic Spanish as they navigate the isometric world. Players have a time limit to find the three things they need before getting on their flight, or else they lose: 1) their passport, 2) their wallet, and 3) their flight tickets. 
 
-* Note for PM : I wanted to keep this as simple as possible, given the timeframe. If this does not seem feasible in a few weeks, I would also be open to do another language learning game that is simpler, like matching pictures to words and spelling words to finish sentences to gain points. Please let me know what you think.
+* Note for PM : I wanted to keep this as simple as possible, given the timeframe. If this does not seem feasible in a few weeks, I'd also be down to do another language learning game that is simpler, like matching pictures to words and spelling words to finish sentences to gain points. Please let me know what you think.
 
 ## Functionality and MVPs
 * `User` navigates through the map using arrow keys: up down, left, right.
