@@ -19,7 +19,7 @@ Players will be able to explore and answer questions that will help them learn b
 ## Wireframe & Mockups
 
 <p align="center"> 
-  <img src="https://i.ibb.co/m8mJM8Q/Screen-Shot-2021-02-08-at-12-22-57-AM.png">
+  <img src="https://i.ibb.co/rQYngKy/new-wireframe.png">
 </p>
 
 
@@ -28,16 +28,14 @@ Players will be able to explore and answer questions that will help them learn b
 </p>
 
 
-<p align="center"> 
-  <img src="https://i.ibb.co/Lhkjyyg/part-1.png">
-</p>
-
 ## File Structure
 * /dist
-    * ...
 * /src
     * /assets
-        * upbeat-music.mp3
+        * /sound
+           * upbeat-music.mp3
+        * /images
+            ...
     * /scripts (js)
         * map.js
         * player.js
