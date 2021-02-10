@@ -1,104 +1,126 @@
-import "./styles/index.scss";
-import "./images/yoda-stitch.jpg";
-import canvasExample from "./scripts/canvas";
-import Square from "./scripts/square";
-import { DOMExample } from "./scripts/DOMExample";
-const currentStateObj = {
-  currentExample: null,
-  currentEventListeners: [],
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+
+const keys = [];
+
+const maria = {
+    x: 200,
+    y: 500,
+
+    width: 32,
+    height: 48,
+
+    //which index of sprite frame to animate
+    frameX: 0,
+    frameY: 0,
+
+    speed: 3,
+    walking: false
 };
 
-document.querySelector("#canvas-demo").addEventListener("click", startCanvas);
-document.querySelector("#DOM-demo").addEventListener("click", startDOM);
+const passport = {
+    x: 400,
+    y: 500,
 
-function startDOM() {
-  unregisterEventListeners();
-  clearDemo();
-  currentStateObj.currentExample = "DOMDEMO";
-  DOMExample();
+    width: 73,
+    height: 69,
+};
+
+const ticket = {
+    x: 300,
+    y: 500,
+
+    width: 80,
+    height: 50,
+};
+
+
+const passportImg = new Image();
+passportImg.src = "./dist/images/passport.png";
+
+const ticketImg = new Image();
+ticketImg.src = "./dist/images/ticket.png";
+
+const background = new Image();
+// background.src = "./dist/images/background.png";
+
+
+const playerMaria = new Image();
+playerMaria.src = "./dist/images/sprite.png";
+
+function drawPassport(img, dX, dY, dW, dH) {
+    ctx.drawImage(img, dX, dY, dW, dH);
+}
+function drawTicket(img, dX, dY, dW, dH) {
+    ctx.drawImage(img, dX, dY, dW, dH);
 }
 
-function startCanvas() {
-  clearDemo();
-  unregisterEventListeners();
-  currentStateObj.currentExample = "CANVASDEMO";
-  const canvas = new canvasExample();
-  canvas.createCanvas();
-  const squares = [new Square(canvas.ctx, canvas.coords, canvas.fillColor)];
+function drawMaria(img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+}
 
-  let animating = true;
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const animation = () => {
-    canvas.clearCanvas();
-    if (animating) squares.forEach((sq) => sq.updateSquare(canvas.fillColor));
-    squares.forEach((sq) => sq.drawSquare());
-    window.requestAnimationFrame(animation);
-    squares.forEach((sq) => {
-      if (sq.coords[0] + sq.coords[2] > window.innerWidth)
-        sq.reverseAnimation();
-      if (sq.coords[0] < 0) sq.reverseAnimation();
-    });
-  };
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-  window.requestAnimationFrame(animation);
+    drawMaria(playerMaria, maria.width * maria.frameX, maria.height * maria.frameY, maria.width, maria.height, maria.x, maria.y, maria.width, maria.height);
+    drawPassport(passportImg, passport.x, passport.y, passport.width, passport.height);
 
-  window.addEventListener("keydown", handleKeyDown);
-  currentStateObj.currentEventListeners.push([
-    "window",
-    "keydown",
-    handleKeyDown,
-  ]);
+    drawTicket(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
 
-  window.addEventListener("mousedown", handleMouseDown);
-  currentStateObj.currentEventListeners.push([
-    "window",
-    "mousedown",
-    handleMouseDown,
-  ]);
+    move();
 
-  function handleKeyDown(event) {
-    if (event.which === 32) {
-      event.preventDefault();
-      squares.forEach((sq) => sq.reverseAnimation());
-      canvas.setColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+    handleWalkingFrame();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+
+window.addEventListener("keydown", function (e) {
+    const key = e.keyCode || e.key; //keyCode deprecated
+
+    keys[key] = true;
+    maria.walking = true;
+});
+
+window.addEventListener("keyup", function (e) {
+    const key = e.keyCode || e.key; //keyCode deprecated
+
+    delete keys[key];
+    maria.walking = false;
+});
+
+function move() {
+
+    if (keys[38] && maria.y > 100) {
+        maria.y -= maria.speed;
+        maria.frameY = 3;
+        maria.walking = true;
     }
-  }
-
-  function handleMouseDown(event) {
-    event.preventDefault();
-    squares.push(
-      new Square(
-        canvas.ctx,
-        canvas.coords.map((co) => co + 25),
-        canvas.fillColor
-      )
-    );
-    // animating = !animating;
-  }
-}
-
-function unregisterEventListeners() {
-  while (currentStateObj.currentEventListeners.length) {
-    let [
-      selector,
-      event,
-      handler,
-    ] = currentStateObj.currentEventListeners.pop();
-    if (selector === "window") {
-      window.removeEventListener(event, handler);
-      console.log(handler);
-    } else {
-      document.querySelector(selector).removeEventListener(event, handler);
+    if (keys[37] && maria.x > 0) {
+        maria.x -= maria.speed;
+        maria.frameY = 1;
+        maria.walking = true;
     }
-  }
+    if (keys[40] && maria.y < canvas.height - maria.height) {
+        maria.y += maria.speed;
+        maria.frameY = 0;
+        maria.walking = true;
+    }
+    if (keys[39] && maria.x < canvas.width - maria.width) {
+        maria.x += maria.speed;
+        maria.frameY = 2;
+        maria.walking = true;
+    }
 }
 
-function clearDemo() {
-  if (currentStateObj.currentExample === "CANVASDEMO")
-    document.body.removeChild(document.querySelector("canvas"));
-  if (currentStateObj.currentExample === "DOMDEMO") {
-    [...document.querySelectorAll(".card")].forEach((elem) =>
-      document.body.removeChild(elem)
-    );
-  }
+function handleWalkingFrame() {
+    if (maria.frameX < 3 && maria.walking) maria.frameX++;
+    else maria.frameX = 0;
 }
