@@ -35,19 +35,33 @@ body{
   margin-left:70px;
 }
 
+.countdown-container{
+  margin-right:100px;
+}
+
 .contact-links-container{
   display:flex;
   flex-direction:row;
   justify-content: space-between;
-  width:500px;
+  align-content: flex-end;
+  width:100%;
   margin-right: 100px;
+  margin-left: 100px;
+  margin-top: 25px;
 }
 
+.contact-links-icon{
+  width:33%;
+  height:60%;
+}
+
+.email-container{
+  margin-top: 7px;
+}
 
 .email{
   text-decoration:none;
   color:white;
-  margin-right:100px;
 }
 
 
