@@ -8,7 +8,7 @@ Lost in Translation is a single-level isometric game to designed to emulate the 
 
 Players will be able to explore and answer questions that will help them learn basic Spanish as they navigate the isometric world. Players have a time limit to find the three things they need before getting on their flight, or else they lose: 1) their passport, 2) their wallet, and 3) their flight tickets. 
 
-* Note for PM : I wanted to keep this as simple as possible, given the timeframe. If this does not seem feasible in a few weeks, I would also be open to do another language learning game that is simpler, like matching pictures to words and spelling words to finish sentences to gain points. Please let me know what you think.
+* Note for PM : I wanted to keep this as simple as possible, given the timeframe. If this does not seem feasible in a few weeks, I'd also be down to do another language learning game that is simpler, like matching pictures to words and spelling words to finish sentences to gain points. Please let me know what you think.
 
 ## Functionality and MVPs
 * `User` navigates through the map using arrow keys: up down, left, right.
@@ -16,10 +16,10 @@ Players will be able to explore and answer questions that will help them learn b
 * `User` must find a `passport`, `tickets`, and their `wallet`.
 * The game should have text that guides the `user` to the goal items.
 
-## Wireframes
+## Wireframe & Mockups
 
 <p align="center"> 
-  <img src="https://i.ibb.co/m8mJM8Q/Screen-Shot-2021-02-08-at-12-22-57-AM.png">
+  <img src="https://i.ibb.co/rQYngKy/new-wireframe.png">
 </p>
 
 
@@ -28,20 +28,18 @@ Players will be able to explore and answer questions that will help them learn b
 </p>
 
 
-<p align="center"> 
-  <img src="https://i.ibb.co/Lhkjyyg/part-1.png">
-</p>
-
 ## File Structure
 * /dist
-    * ...
 * /src
     * /assets
-        * upbeat-music.mp3
+        * /sound
+           * upbeat-music.mp3
+        * /images
+            ...
     * /scripts (js)
         * map.js
         * player.js
-        * dialogue.js (incl fruits?)
+        * dialogue.js 
         * item.js
         * util.js
     * /styles (scss)
