@@ -4,7 +4,6 @@ const ctx = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
-
 const keys = [];
 
 const maria = {
@@ -63,24 +62,6 @@ function drawMaria(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-    drawMaria(playerMaria, maria.width * maria.frameX, maria.height * maria.frameY, maria.width, maria.height, maria.x, maria.y, maria.width, maria.height);
-    drawPassport(passportImg, passport.x, passport.y, passport.width, passport.height);
-
-    drawTicket(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
-
-    move();
-
-    handleWalkingFrame();
-    requestAnimationFrame(animate);
-}
-
-animate();
-
 
 window.addEventListener("keydown", function (e) {
     const key = e.keyCode || e.key; //keyCode deprecated
@@ -120,7 +101,30 @@ function move() {
     }
 }
 
+
 function handleWalkingFrame() {
     if (maria.frameX < 3 && maria.walking) maria.frameX++;
     else maria.frameX = 0;
 }
+
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    drawMaria(playerMaria, maria.width * maria.frameX, maria.height * maria.frameY, maria.width, maria.height, maria.x, maria.y, maria.width, maria.height);
+    drawPassport(passportImg, passport.x, passport.y, passport.width, passport.height);
+
+    drawTicket(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
+
+    move();
+
+    handleWalkingFrame();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+
+
