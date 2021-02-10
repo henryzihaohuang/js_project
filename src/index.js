@@ -1,3 +1,26 @@
+import { maria, handleWalkingFrame, drawMaria } from "./maria.js";
+import { passport, drawPassport } from "./passport.js";
+// import countdown from "./countdown.js";
+
+//countdown timer
+window.onload = () => {
+
+    let minutes = 15;
+    let seconds = 59;
+
+    setInterval(() => {
+        seconds = (seconds % 60) < 10 ? "0" + seconds : seconds;
+        document.getElementById("countdown").innerHTML = minutes + " min : " + seconds + " sec before departure";
+        seconds--;
+
+        if (seconds === 0) {
+            minutes--;
+            seconds = 59;
+        }
+    }, 1000);
+}
+
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -5,29 +28,6 @@ canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
 const keys = [];
-
-const maria = {
-    x: 200,
-    y: 500,
-
-    width: 32,
-    height: 48,
-
-    //which index of sprite frame to animate
-    frameX: 0,
-    frameY: 0,
-
-    speed: 3,
-    walking: false
-};
-
-const passport = {
-    x: 400,
-    y: 500,
-
-    width: 73,
-    height: 69,
-};
 
 const ticket = {
     x: 300,
@@ -38,44 +38,37 @@ const ticket = {
 };
 
 
+//images
 const passportImg = new Image();
 passportImg.src = "./dist/images/passport.png";
 
 const ticketImg = new Image();
 ticketImg.src = "./dist/images/ticket.png";
 
-const background = new Image();
-// background.src = "./dist/images/background.png";
-
-
 const playerMaria = new Image();
 playerMaria.src = "./dist/images/sprite.png";
 
-function drawPassport(img, dX, dY, dW, dH) {
-    ctx.drawImage(img, dX, dY, dW, dH);
-}
+//draw images
+
 function drawTicket(img, dX, dY, dW, dH) {
     ctx.drawImage(img, dX, dY, dW, dH);
 }
 
-function drawMaria(img, sX, sY, sW, sH, dX, dY, dW, dH) {
-    ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-}
-
-
+//keystroke eventlisteners
 window.addEventListener("keydown", function (e) {
-    const key = e.keyCode || e.key; //keyCode deprecated
+    const key = e.keyCode 
 
     keys[key] = true;
     maria.walking = true;
 });
 
 window.addEventListener("keyup", function (e) {
-    const key = e.keyCode || e.key; //keyCode deprecated
+    const key = e.keyCode 
 
     delete keys[key];
     maria.walking = false;
 });
+
 
 function move() {
 
@@ -101,19 +94,11 @@ function move() {
     }
 }
 
-
-function handleWalkingFrame() {
-    if (maria.frameX < 3 && maria.walking) maria.frameX++;
-    else maria.frameX = 0;
-}
-
-
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
     drawMaria(playerMaria, maria.width * maria.frameX, maria.height * maria.frameY, maria.width, maria.height, maria.x, maria.y, maria.width, maria.height);
+
     drawPassport(passportImg, passport.x, passport.y, passport.width, passport.height);
 
     drawTicket(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
