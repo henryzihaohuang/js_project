@@ -1,7 +1,7 @@
 const countdown = () => {
     window.onload = () => {
 
-        let minutes = 15;
+        let minutes = 14;
         let seconds = 59;
 
         setInterval(() => {
