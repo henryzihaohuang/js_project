@@ -13,7 +13,10 @@ export const sunny = {
     walking: false
 };
 
-export function handleWalkingFrame() {
-    if (sunny.frameX < 3 && sunny.walking) sunny.frameX++;
-    else sunny.frameX = 0;
+export function handleWalking() {
+    if (sunny.frameX < 3 && sunny.walking) {
+        sunny.frameX ++;
+    } else {
+        sunny.frameX = 0;
+    }
 }
