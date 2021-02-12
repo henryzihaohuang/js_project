@@ -15,6 +15,8 @@ window.gameSplashScreen2 = true;
 window.gameSplashScreen3 = true;
 window.gameOver = false;
 window.introDialogue = true;
+window.introDialogue2 = false;
+window.introDialogue3 = false;
 
 // //images
 // const splashImg = new Image();
@@ -90,13 +92,26 @@ document.addEventListener("keydown", (e) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         window.gameStart = true;
         countdown();
+        
 
-        // load intro dialogue after splash screens
-    } else if ([32].includes(key) && window.gameStart) {
-        window.introDialogue === true ? window.introDialogue = false : window.introDialogue = true;
+        // load intro dialogue-2 after initial intro dialogue
+    } else if ([32].includes(key) && window.gameStart && window.introDialogue === true) {
+        window.introDialogue = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        window.introDialogue2 = true;
 
-
+        // load intro dialogue-3 after splash screens
+    } else if ([32].includes(key) && window.introDialogue2 === true ) {
+        window.introDialogue2 = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        window.introDialogue3 = true;
+        
+    } else if ([32].includes(key) && window.introDialogue3 === true ) {
+        window.introDialogue3 = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+
+
 });
 
 document.addEventListener("keyup", (e) => {
@@ -132,22 +147,37 @@ function move() {
 
 //game dialogue
 let dialogueText;
+ctx.font = "14pt Courier";
 
-//create gamestate
-//create conditional 
-
-function pickUpItem(){
-    ctx.font = "14pt Courier";
-    dialogueText = ["Hola! Cómo estás?", "Hey! how are you?"];
+function dialogue(){
     if (window.introDialogue && window.gameStart) {
+        dialogueText = ["Hola! Cómo estás?", "Hey! how are you?"];
         drawDialogue(ctx);
         for (let i=0; i < dialogueText.length; i++) {
             let lineHeight = (i + 1) * 30 + 472
             ctx.fillText(dialogueText[i], 420, lineHeight);
         }
-    }
 
-    // if ()
+    } else if (!window.introDialogue && window.introDialogue2) {
+        dialogueText = ["My name is Sunny, un gusto!", "A pleasure!"];
+        drawDialogue(ctx);
+       
+        for (let i = 0; i < dialogueText.length; i++) {
+            
+            let lineHeight = (i + 1) * 30 + 472
+            ctx.fillText(dialogueText[i], 420, lineHeight);
+        }
+
+    } else if (!window.introDialogue2 && window.introDialogue3) {
+        dialogueText = ["Oye! I gotta get my passport, my plane tickets,", "and my wallet before the taxi gets here!"];
+        drawDialogue(ctx);
+        debugger
+        for (let i = 0; i < dialogueText.length; i++) {
+            let lineHeight = (i + 1) * 30 + 472
+            ctx.fillText(dialogueText[i], 420, lineHeight);
+        }
+
+    }
 }
 
 //animate game
@@ -163,8 +193,8 @@ function animate() {
         
         draw(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
         
+        dialogue();
         move();
-        pickUpItem();
         handleWalking();
     }
 

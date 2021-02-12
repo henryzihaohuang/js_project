@@ -1,7 +1,7 @@
 const countdown = () => {
     // window.onload = () => {
     if (window.gameStart){
-        let minutes = 14;
+        let minutes = 1;
         let seconds = 59;
 
         setInterval(() => {
