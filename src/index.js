@@ -14,7 +14,7 @@ window.gameSplashScreen = false;
 window.gameSplashScreen2 = true;
 window.gameSplashScreen3 = true;
 window.gameOver = false;
-window.gameDialogue = false;
+window.introDialogue = true;
 
 // //images
 // const splashImg = new Image();
@@ -72,24 +72,29 @@ document.addEventListener("keydown", (e) => {
         keys[key] = true;
         sunny.walking = true;
 
-    } else if ([32].includes(key) && window.gameStart){
-        window.gameDialogue === true ? window.gameDialogue = false : window.gameDialogue = true;
-
+        // load first splash
     } else if ([32].includes(key) && !window.gameSplashScreen) {
         window.gameSplashScreen = true;
         window.gameSplashScreen2 = false;
         loadSplash2();
 
+         // load second splash
     } else if ([32].includes(key) && !window.gameSplashScreen2) {
         window.gameSplashScreen2 = true;
         window.gameSplashScreen3 = false;
         loadSplash3();
 
+         // load third  splash
     } else if ([32].includes(key) && !window.gameSplashScreen3) {
         window.gameSplashScreen3 = true;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         window.gameStart = true;
         countdown();
+
+        // load intro dialogue after splash screens
+    } else if ([32].includes(key) && window.gameStart) {
+        window.introDialogue === true ? window.introDialogue = false : window.introDialogue = true;
+
 
     }
 });
@@ -127,12 +132,22 @@ function move() {
 
 //game dialogue
 let dialogueText;
+
+//create gamestate
+//create conditional 
+
 function pickUpItem(){
-    dialogueText = "Hey! This is my plane ticket!";
-    if (window.gameDialogue) {
+    ctx.font = "14pt Courier";
+    dialogueText = ["Hola! Cómo estás?", "Hey! how are you?"];
+    if (window.introDialogue && window.gameStart) {
         drawDialogue(ctx);
-        ctx.fillText(dialogueText, 420, 510)
+        for (let i=0; i < dialogueText.length; i++) {
+            let lineHeight = (i + 1) * 30 + 472
+            ctx.fillText(dialogueText[i], 420, lineHeight);
+        }
     }
+
+    // if ()
 }
 
 //animate game
