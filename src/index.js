@@ -9,44 +9,58 @@ const ctx = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
-
 //window states
-window.gameStart = false;
+window.gameSplashScreen = false;
+window.gameSplashScreen2 = true;
+window.gameSplashScreen3 = true;
 window.gameOver = false;
 window.gameDialogue = false;
 
-//images
+// //images
+// const splashImg = new Image();
+// splashImg.src = "./dist/images/splash.png";
 const splashImg = new Image();
 splashImg.src = "./dist/images/splash.png";
+const splashImg2 = new Image();
+splashImg2.src = "./dist/images/splash-2.png";
+const splashImg3 = new Image();
+splashImg3.src = "./dist/images/splash-3.png";
 const passportImg = new Image();
 passportImg.src = "./dist/images/passport.png";
 const ticketImg = new Image();
 ticketImg.src = "./dist/images/ticket.png";
 const sunnyImg = new Image();
 sunnyImg.src = "./dist/images/sprite.png";
+const livingRoomImg = new Image();
+livingRoomImg.src = "./dist/images/living-room.png";
 const textbox = new Image();
 textbox.src = "./dist/images/dialogue.png"
 
 //draw images
-function drawSplash(img, dX, dY, dW, dH) {
+function draw(img, dX, dY, dW, dH) {
     ctx.drawImage(img, dX, dY, dW, dH);
 };
 function drawSunny(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-}
-function drawPassport(img, dX, dY, dW, dH) {
-    ctx.drawImage(img, dX, dY, dW, dH);
-};
-function drawTicket(img, dX, dY, dW, dH) {
-    ctx.drawImage(img, dX, dY, dW, dH);
 }
 function drawDialogue(ctx) {
     ctx.drawImage(textbox, 240, 450, 800, 128)
 };
 
 function loadSplash(){
-    if (window.gameStart === false) {;
-        drawSplash(splashImg, canvas.width/8, 50, 900, 700);
+    if (window.gameSplashScreen === false) {;
+        draw(splashImg, 0, 100, canvas.width, 487);
+    }
+}
+
+function loadSplash2(){
+    if (window.gameSplashScreen2 === false) {
+        draw(splashImg2, 0, 100, canvas.width, 487);
+    }
+}
+function loadSplash3(){
+    if (window.gameSplashScreen3 === false) {
+        draw(splashImg3, 0, 100, canvas.width, 487);
     }
 }
 
@@ -61,11 +75,25 @@ document.addEventListener("keydown", (e) => {
     } else if ([32].includes(key) && window.gameStart){
         window.gameDialogue === true ? window.gameDialogue = false : window.gameDialogue = true;
 
-    } else if ([32].includes(key) && !window.gameStart) {
+    } else if ([32].includes(key) && !window.gameSplashScreen) {
+        window.gameSplashScreen = true;
+        window.gameSplashScreen2 = false;
+        loadSplash2();
+
+    } else if ([32].includes(key) && !window.gameSplashScreen2) {
+        window.gameSplashScreen2 = true;
+        window.gameSplashScreen3 = false;
+        loadSplash3();
+
+    } else if ([32].includes(key) && !window.gameSplashScreen3) {
+        window.gameSplashScreen3 = true;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         window.gameStart = true;
         countdown();
+
     }
 });
+
 document.addEventListener("keyup", (e) => {
     const key = e.keyCode 
     if ([37, 38, 39, 40].includes(key)) {
@@ -109,15 +137,17 @@ function pickUpItem(){
 
 //animate game
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     loadSplash();
     if (window.gameStart) {
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        draw(livingRoomImg, 0, 100, canvas.width, 487);
         drawSunny(sunnyImg, (sunny.frameX / sunny.width), (sunny.frameY * sunny.height), sunny.width, sunny.height, sunny.x, sunny.y, sunny.width, sunny.height);
-
-        drawPassport(passportImg, passport.x, passport.y, passport.width, passport.height);
-
-        drawTicket(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
-
+        
+        draw(passportImg, passport.x, passport.y, passport.width, passport.height);
+        
+        draw(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
+        
         move();
         pickUpItem();
         handleWalking();
@@ -127,4 +157,4 @@ function animate() {
     requestAnimationFrame(animate);
 
 }
-animate();
+animate()

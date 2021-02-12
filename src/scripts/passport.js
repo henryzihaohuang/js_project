@@ -1,6 +1,6 @@
 export const passport = {
-     x: 400,
-     y: 500,
+     x: 700,
+     y: 400,
      width: 73,
      height: 69,
 };

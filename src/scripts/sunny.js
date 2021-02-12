@@ -1,6 +1,6 @@
 export const sunny = {
-    x: 200,
-    y: 500,
+    x: 180,
+    y: 380,
 
     width: 136,
     height: 172,
@@ -9,7 +9,7 @@ export const sunny = {
     frameX: 0,
     frameY: 0,
 
-    speed: 3,
+    speed: 8,
     walking: false
 };
 
