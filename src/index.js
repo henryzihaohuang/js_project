@@ -17,6 +17,7 @@ window.gameOver = false;
 window.introDialogue = true;
 window.introDialogue2 = false;
 window.introDialogue3 = false;
+window.foundTickets = false;
 
 // //images
 // const splashImg = new Image();
@@ -66,6 +67,11 @@ function loadSplash3(){
     }
 }
 
+//audio
+const backgroundMusic = new Audio("./dist/audio/background.mp3")
+backgroundMusic.play();
+
+
 //keystroke eventlisteners
 const keys = [];
 document.addEventListener("keydown", (e) => {
@@ -93,7 +99,6 @@ document.addEventListener("keydown", (e) => {
         window.gameStart = true;
         countdown();
         
-
         // load intro dialogue-2 after initial intro dialogue
     } else if ([32].includes(key) && window.gameStart && window.introDialogue === true) {
         window.introDialogue = false;
@@ -106,8 +111,15 @@ document.addEventListener("keydown", (e) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         window.introDialogue3 = true;
         
+         // clear intro dialogue-3 
     } else if ([32].includes(key) && window.introDialogue3 === true ) {
         window.introDialogue3 = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+    } else if ([32].includes(key) && 290<sunny.x<310 && 490<sunny.y<510) {
+        window.foundTickets = true;
+    } else if ([32].includes(key) && window.foundTickets === true) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
@@ -123,7 +135,7 @@ document.addEventListener("keyup", (e) => {
 
 // move Sunny
 function move() {
-    if (keys[38] && sunny.y > 100) {
+    if (keys[38] && sunny.y > 300) {
         sunny.y -= sunny.speed;
         sunny.frameY = 3;
         sunny.walking = true;
@@ -171,12 +183,19 @@ function dialogue(){
     } else if (!window.introDialogue2 && window.introDialogue3) {
         dialogueText = ["Oye! I gotta get my passport, my plane tickets,", "and my wallet before the taxi gets here!"];
         drawDialogue(ctx);
-        debugger
         for (let i = 0; i < dialogueText.length; i++) {
             let lineHeight = (i + 1) * 30 + 472
             ctx.fillText(dialogueText[i], 420, lineHeight);
         }
 
+        //found tickets
+    } else if (window.foundTickets) {
+        dialogueText = ["Orale, you found my flight tickets.","Muchas gracias!"];
+        drawDialogue(ctx);
+        for (let i = 0; i < dialogueText.length; i++) {
+            let lineHeight = (i + 1) * 30 + 472
+            ctx.fillText(dialogueText[i], 420, lineHeight);
+        }
     }
 }
 
