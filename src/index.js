@@ -77,8 +77,13 @@ function loadSplash3() {
 
 //audio
 const backgroundMusic = new Audio("./dist/audio/background.mp3")
-backgroundMusic.addEventListener("loaded", (e) => {
-    backgroundMusic.play();
+const playBtn = document.getElementById("backgroundMusic")
+playBtn.addEventListener("click", (e) => {
+    if (backgroundMusic.paused){
+        backgroundMusic.play();
+    } else {
+        backgroundMusic.pause();
+    }
 });
 
 //keystroke eventlisteners
@@ -89,7 +94,7 @@ document.addEventListener("keydown", (e) => {
         keys[key] = true;
         sunny.walking = true;
 
-        // load first splash--------------------------------------------------------------------
+        // load first splash
     } else if ([32].includes(key) && !window.gameSplashScreen) {
         window.gameSplashScreen = true;
         window.gameSplashScreen2 = false;
@@ -108,7 +113,7 @@ document.addEventListener("keydown", (e) => {
         window.gameStart = true;
         countdown();
 
-        // load intro dialogue-2 after initial intro dialogue--------------------------------------------------------------------
+        // load intro dialogue-2 after initial intro dialogue
     } else if ([32].includes(key) && window.gameStart && window.introDialogue === true) {
         window.introDialogue = false;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -125,7 +130,7 @@ document.addEventListener("keydown", (e) => {
         window.introDialogue3 = false;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        //found tickets dialogue--------------------------------------------------------------------
+        //found tickets dialogue
     } else if ([32].includes(key) && 298 < sunny.x < 302 && 498 < sunny.y < 501 && window.foundTickets === false && !window.inventory.includes("tickets")) {
         window.foundTickets = true;
 

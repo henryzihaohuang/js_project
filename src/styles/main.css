@@ -31,10 +31,24 @@ body{
   background: rgba(0,0,0,0.8);
 }
 
-.lost-in-translation-text{
-  margin-left:70px;
+.header-subcontainer{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
 }
 
+.lost-in-translation-text{
+  margin-left:100px;
+}
+
+.play-btn{
+  width:30px;
+  height:30px;
+  margin-right:40px;
+  cursor:pointer;
+}
 .countdown-container{
   margin-right:100px;
 }
