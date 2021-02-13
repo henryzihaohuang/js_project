@@ -13,17 +13,20 @@ canvas.width = window.innerWidth;
 window.gameSplashScreen = false;
 window.gameSplashScreen2 = true;
 window.gameSplashScreen3 = true;
-window.gameOver = false;
+
 window.introDialogue = true;
 window.introDialogue2 = false;
 window.introDialogue3 = false;
+
 window.foundTickets = false;
 window.foundTickets2 = false;
+window.foundTickets3 = false;
 window.inventory = [];
 
+
+window.gameOver = false;
+
 // //images
-// const splashImg = new Image();
-// splashImg.src = "./dist/images/splash.png";
 const splashImg = new Image();
 splashImg.src = "../dist/images/splash.png";
 const splashImg2 = new Image();
@@ -41,7 +44,7 @@ livingRoomImg.src = "../dist/images/living-room.png";
 const textbox = new Image();
 textbox.src = "../dist/images/dialogue.png"
 
-//draw images
+//draw image fx
 function draw(img, dX, dY, dW, dH) {
     ctx.drawImage(img, dX, dY, dW, dH);
 };
@@ -51,6 +54,9 @@ function drawSunny(img, sX, sY, sW, sH, dX, dY, dW, dH) {
 function drawDialogue(ctx) {
     ctx.drawImage(textbox, 240, 450, 800, 128)
 };
+function drawDialogueResponse(ctx) {
+    ctx.drawImage(textbox, 240, 380, 800, 200)
+};
 
 function loadSplash() {
     if (window.gameSplashScreen === false) {
@@ -58,7 +64,6 @@ function loadSplash() {
         draw(splashImg, 0, 100, canvas.width, 487);
     }
 }
-
 function loadSplash2() {
     if (window.gameSplashScreen2 === false) {
         draw(splashImg2, 0, 100, canvas.width, 487);
@@ -72,7 +77,7 @@ function loadSplash3() {
 
 //audio
 const backgroundMusic = new Audio("./dist/audio/background.mp3")
-backgroundMusic.addEventListener("canplaythrough", (e) => {
+backgroundMusic.addEventListener("loaded", (e) => {
     backgroundMusic.play();
 });
 
@@ -84,7 +89,7 @@ document.addEventListener("keydown", (e) => {
         keys[key] = true;
         sunny.walking = true;
 
-        // load first splash
+        // load first splash--------------------------------------------------------------------
     } else if ([32].includes(key) && !window.gameSplashScreen) {
         window.gameSplashScreen = true;
         window.gameSplashScreen2 = false;
@@ -103,7 +108,7 @@ document.addEventListener("keydown", (e) => {
         window.gameStart = true;
         countdown();
 
-        // load intro dialogue-2 after initial intro dialogue
+        // load intro dialogue-2 after initial intro dialogue--------------------------------------------------------------------
     } else if ([32].includes(key) && window.gameStart && window.introDialogue === true) {
         window.introDialogue = false;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -120,15 +125,23 @@ document.addEventListener("keydown", (e) => {
         window.introDialogue3 = false;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        //found tickets dialogue
-    } else if ([32].includes(key) && 298 < sunny.x < 302 && 498 < sunny.y < 501 && window.foundTickets ===false) {
+        //found tickets dialogue--------------------------------------------------------------------
+    } else if ([32].includes(key) && 298 < sunny.x < 302 && 498 < sunny.y < 501 && window.foundTickets === false && !window.inventory.includes("tickets")) {
         window.foundTickets = true;
 
         //clear foundTickets dialogue
-    } else if ([32].includes(key) && window.foundTickets === true && window.foundTickets2===false) {
+    } else if ([32].includes(key) && window.foundTickets === true && window.foundTickets2 === false && window.inventory.includes("tickets")) {
         window.foundTickets = false;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         window.foundTickets2 = true;
+
+    } else if ([32].includes(key) && window.foundTickets2 === true && window.foundTickets3 === false && window.inventory.includes("tickets")) {
+        window.foundTickets2 = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        window.foundTickets3 = true;
+    } else if ([32].includes(key) && window.foundTickets3 === true) {
+        window.foundTickets3 = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
 
@@ -189,7 +202,7 @@ function dialogue() {
         }
 
     } else if (!window.introDialogue2 && window.introDialogue3) {
-        dialogueText = ["Oye! I gotta get my passport, my plane tickets,", "and my wallet before the taxi gets here!"];
+        dialogueText = ["¡Oye! I gotta get my passport, my plane tickets,", "and my wallet before the taxi gets here!"];
         drawDialogue(ctx);
         for (let i = 0; i < dialogueText.length; i++) {
             let lineHeight = (i + 1) * 30 + 472
@@ -198,8 +211,10 @@ function dialogue() {
 
         //found tickets
     } else if (window.foundTickets) {
-        dialogueText = ["Órale, muchas gracias!","You found my flight tickets." ];
+        dialogueText = ["¡Ándale! You found my flight tickets.","¡Muchas gracias!", ];
         drawDialogue(ctx);
+        window.inventory.push("tickets");
+
         for (let i = 0; i < dialogueText.length; i++) {
             let lineHeight = (i + 1) * 30 + 472
             ctx.fillText(dialogueText[i], 420, lineHeight);
@@ -209,19 +224,17 @@ function dialogue() {
     } else if (window.foundTickets2) {
         dialogueText = ["How do you say, \"Here is my passport.\"", "in Spanish?"];
         drawDialogue(ctx);
-        window.inventory.push("tickets");
         for (let i = 0; i < dialogueText.length; i++) {
             let lineHeight = (i + 1) * 30 + 472
             ctx.fillText(dialogueText[i], 420, lineHeight);
         }
         //
-    } else if (window.foundTickets2) {
-        dialogueText = ["How do you say, \"Here is my passport.\"", "in Spanish?"];
-        drawDialogue(ctx);
-        window.inventory.push("tickets");
+    } else if (window.foundTickets3) {
+        dialogueText = ["Acá está mi pasaporte.", "¿Dónde está mi pasaporte?", "Necesito mi pasaporte.", "Este! ¡¡¡¡Pasaporte!!!! HEREEEEEE TAKE IT!"];
+        drawDialogueResponse(ctx);
         for (let i = 0; i < dialogueText.length; i++) {
-            let lineHeight = (i + 1) * 30 + 472
-            ctx.fillText(dialogueText[i], 420, lineHeight);
+            let lineHeight = (i + 1) * 30 + 409
+            ctx.fillText(dialogueText[i], 370, lineHeight);
         }
     }
 }
