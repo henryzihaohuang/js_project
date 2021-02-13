@@ -30,19 +30,19 @@ window.gameOver = false;
 const splashImg = new Image();
 splashImg.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/splash.png";
 const splashImg2 = new Image();
-splashImg2.src = "../dist/images/splash-2.png";
+splashImg2.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/splash-2.png";
 const splashImg3 = new Image();
-splashImg3.src = "../dist/images/splash-3.png";
+splashImg3.src = ".https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/splash-3.png";
 const passportImg = new Image();
-passportImg.src = "../dist/images/passport.png";
+passportImg.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/passport.png";
 const ticketImg = new Image();
-ticketImg.src = "../dist/images/ticket.png";
+ticketImg.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/ticket.png";
 const sunnyImg = new Image();
-sunnyImg.src = "../dist/images/sprite.png";
+sunnyImg.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/sprite.png";
 const livingRoomImg = new Image();
-livingRoomImg.src = "../dist/images/living-room.png";
+livingRoomImg.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/living-room.png";
 const textbox = new Image();
-textbox.src = "../dist/images/dialogue.png"
+textbox.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/dialogue.png"
 
 //draw image fx
 function draw(img, dX, dY, dW, dH) {
