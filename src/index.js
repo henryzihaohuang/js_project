@@ -28,7 +28,7 @@ window.gameOver = false;
 
 // //images
 const splashImg = new Image();
-splashImg.src = "../dist/images/splash.png";
+splashImg.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/splash.png";
 const splashImg2 = new Image();
 splashImg2.src = "../dist/images/splash-2.png";
 const splashImg3 = new Image();
