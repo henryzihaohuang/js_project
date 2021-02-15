@@ -6,6 +6,10 @@
 ## Background and Overview
 Lost in Translation is a single-level isometric game to designed to emulate the feeling of trying to navigate your way in a foreign country to get to your destination. I wanted to draw from my background in languages and share my real-life hack to learning languages, which is to explore and try in real-life situations. Lost in Translation is played from a main character who is trying to get to the airport from their hostel, but cannot speak the primary language of the country, Spanish. 
 
+<p align="center">
+  <img src="https://media.giphy.com/media/uevsuTCbS0aEajJUah/giphy.gif">
+</p>
+ 
 Players will be able to explore and answer questions that will help them learn basic Spanish as they navigate the isometric world. Players have a time limit to find the three things they need before getting on their flight, or else they lose: 1) their passport, 2) their wallet, and 3) their flight tickets. 
 
 * Note for PM : I wanted to keep this as simple as possible, given the timeframe. If this does not seem feasible in a few weeks, I'd also be down to do another language learning game that is simpler, like matching pictures to words and spelling words to finish sentences to gain points. Please let me know what you think.
@@ -14,36 +18,33 @@ Players will be able to explore and answer questions that will help them learn b
 * `User` navigates through the map using arrow keys: up down, left, right.
 * `User` can click to interact with objects to complete their mission.
 * `User` must find a `passport`, `tickets`, and their `wallet`.
-* The game should have text that guides the `user` to the goal items.
+* `User` will answer Spanish language-learning questions when they find items within countdown time limit.
+    * When `User` answers questions wrong, they get time deducted from their countdown.
+    * When `User` answers questions right, they get time added to the countdown.
+    
+<p align="center"> 
+  <img src="https://media.giphy.com/media/ySPsBUNdVMHmFya8X4/giphy.gif">
+</p> 
 
 ## Wireframe & Mockups
 
 <p align="center"> 
-  <img src="https://i.ibb.co/rQYngKy/new-wireframe.png">
+  <img src="https://i.ibb.co/k8tFyZT/new-wireframe.png">
 </p>
-
-
-<p align="center"> 
-  <img src="https://i.ibb.co/9s4wPB5/splash.png">
-</p>
-
 
 ## File Structure
 * /dist
-* /src
     * /assets
-        * /sound
-           * upbeat-music.mp3
+        * /audio
         * /images
-            ...
+* /src
     * /scripts (js)
-        * map.js
-        * player.js
-        * dialogue.js 
-        * item.js
-        * util.js
-    * /styles (scss)
-        * stylesheets
+        * countdown.js
+        * dialogue.js
+        * passport.js 
+        * sunny.js
+        * tickets.js
+    * /styles (css)
     * index.js
 * .gitignore
 * index.html
@@ -56,9 +57,8 @@ Players will be able to explore and answer questions that will help them learn b
 * webpack.prod.js
 
 ## Architecture and Technology
-* Melon.js - tile map
 * JavaScript - Game logic
-* Sprites - Animation
+* Canvas - Game
 * SCSS - Page Styling 
 
 ## Implementation Timeline
@@ -82,7 +82,7 @@ Day 3 - Feb 10
 * Dialoge
 
 Day 4 - Feb 11
-* Complete map details
+* More map details
 * Source sound
 * Styling
 
@@ -91,4 +91,6 @@ Day 5 - Feb 12
 * Host
 
 ## Bonus Features
-* Player can respond to non-playable characters' dialogues. As an added bonus to enrich language learning aspect of the game.
+* Will add more at least one more room to extend story of Sunny getting to the airport via taxi.
+
+
