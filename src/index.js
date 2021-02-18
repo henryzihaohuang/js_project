@@ -6,8 +6,10 @@ import countdown from "./scripts/countdown.js";
 //canvas ctx
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+canvas.width = window.innerWidth; 
+canvas.height = canvas.width * 1.5;
+
 
 //window states
 window.gameSplashScreen = false;
@@ -28,7 +30,7 @@ window.correctTicketAnswer = false;
 window.inventory = [];
 
 
-window.gameOver = false;
+window.lostGame = false;
 
 // //images
 const splashImg = new Image();
@@ -49,6 +51,8 @@ const textbox = new Image();
 textbox.src = "https://raw.githubusercontent.com/henryzihaohuang/lost_in_translation/main/dist/images/dialogue.png"
 const selectorImg = new Image();
 selectorImg.src = "https://i.ibb.co/GVYdDmL/selector.png"
+const loseImg = new Image();
+loseImg.src = "../dist/images/lose-page.png"
 
 //draw image fx
 function draw(img, dX, dY, dW, dH) {
@@ -81,6 +85,13 @@ function loadSplash3() {
         draw(splashImg3, 0, 100, canvas.width, 487);
     }
 }
+function lostGame() {
+    if (window.lostGame === true) {
+        draw(loseImg, 0, 100, canvas.width, 487);
+    }
+}
+
+
 //audio
 const backgroundMusic = new Audio("../dist/audio/background.mp3")
 const playBtn = document.getElementById("backgroundMusic")
@@ -278,6 +289,8 @@ function dialogue() {
     }
 }
 
+
+
 //animate game
 function animate() {
     loadSplash();
@@ -309,9 +322,9 @@ function animate() {
         
 
 
-        
         move();
         handleWalking();
+        lostGame();
     }
 
 

@@ -1,5 +1,4 @@
 const countdown = () => {
-    // window.onload = () => {
     if (window.gameStart){
         let minutes = 1;
         let seconds = 59;
@@ -10,17 +9,13 @@ const countdown = () => {
                 document.getElementById("countdown").innerHTML = minutes + " min : " + seconds + " sec before departure";
             } else {
                 document.getElementById("countdown").innerHTML = "Time is up!";
-                window.gameOver = true;
+                window.lostGame = true;
             }
-            
             seconds--;
-
             if (seconds === 0) {
                 minutes--;
                 seconds = 59;
             }
-
-            
         }, 1000);
     }
 }
