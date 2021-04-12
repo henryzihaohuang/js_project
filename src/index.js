@@ -70,24 +70,24 @@ function drawDialogueResponse(ctx) {
 
 function loadSplash() {
     if (window.gameSplashScreen === false) {
-        draw(splashImg, 0, 100, canvas.width, 487);
+        draw(splashImg, 0, 100, canvas.width, 542);
     }
 }
 
 function loadSplash2() {
     if (window.gameSplashScreen2 === false) {
-        draw(splashImg2, 0, 100, canvas.width, 487);
+        draw(splashImg2, 0, 100, canvas.width, 542);
     }
 }
 
 function loadSplash3() {
     if (window.gameSplashScreen3 === false) {
-        draw(splashImg3, 0, 100, canvas.width, 487);
+        draw(splashImg3, 0, 100, canvas.width, 542);
     }
 }
 function lostGame() {
     if (window.lostGame === true) {
-        draw(loseImg, 0, 100, canvas.width, 487);
+        draw(loseImg, 0, 100, canvas.width, 542);
     }
 }
 
@@ -289,21 +289,19 @@ function dialogue() {
     }
 }
 
-
-
 //animate game
 function animate() {
     loadSplash();
     if (window.gameStart) {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        draw(livingRoomImg, 0, 100, canvas.width, 487);
+        draw(livingRoomImg, 0, 100, canvas.width, 542);
         drawSunny(sunnyImg, (sunny.frameX / sunny.width), (sunny.frameY * sunny.height), sunny.width, sunny.height, sunny.x, sunny.y, sunny.width, sunny.height);
         
         if (!(window.inventory).includes("tickets")) {
             draw(ticketImg, ticket.x, ticket.y, ticket.width, ticket.height);
         } else {
-            draw(ticketImg, 1168, 300, ticket.width, ticket.height);
+            draw(ticketImg, 1318, 300, ticket.width, ticket.height);
         }
         draw(passportImg, passport.x, passport.y, passport.width, passport.height);
 
@@ -318,17 +316,10 @@ function animate() {
         } else if (keys[keys.length - 1] === 52 && window.foundTickets3) {
             draw(selectorImg, 300, 518, 700, 50);
         }
-
-        
-
-
         move();
         handleWalking();
         lostGame();
     }
-
-
     requestAnimationFrame(animate);
-
 }
 animate()
